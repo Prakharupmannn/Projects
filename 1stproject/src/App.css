@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+body{
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(120deg,#4facfe,#00f2fe);
+}
+
+.container{
+  width:400px;
+  margin:80px auto;
+  background:white;
+  padding:25px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+h1{
+  margin-bottom:20px;
+}
+
+.inputBox{
+  
+  display:flex;
+  gap:10px;
+}
+
+input{
+  flex:1;
+  padding:10px;
+  border-radius:5px;
+  border:1px solid #ccc;
+}
+
+button{
+  padding:10px 14px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.addBtn{
+  background:#28a745;
+  color:white;
+}
+
+.deleteBtn{
+  background:#dc3545;
+  color:white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.deleteBtn:hover{
+  background: #218838;
+}
+
+.clearBtn{
+  margin-top:15px;
+  background:#333;
+  color:white;
+}
+
+li{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
+  padding:8px;
+  border-bottom:1px solid #eee;
+}
+
+.count{
+  margin:15px 0;
+  font-weight:bold;
+}
