@@ -10,6 +10,7 @@ import Demo from './components/Demo'
 import Dammy from './components/Dammy'
 import Dammy2 from './components/Dammy2'
 import Dummy3 from './components/dummy3'
+import Dummy4 from './components/Dummy4'
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
     // {/* <Dammy /> */}
     // {/* <Dammy2/> */}
     // {/* <Dummy3></Dummy3> */}
+    
     // </>
     
     // <>
@@ -43,7 +45,7 @@ function App() {
 
 
     <>
-      <Navbar/>
+      <Dummy4></Dummy4>
     </>
   )
 }

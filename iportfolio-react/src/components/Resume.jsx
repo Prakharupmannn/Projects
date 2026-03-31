@@ -10,7 +10,7 @@ export default function Resume() {
           <div className="mt-4 border-l-4 border-blue-600 pl-4">
             <h4 className="font-bold text-lg">Prakhar Upman</h4>
             <p className="text-gray-600">
-              Passionate web developer with experience in React and Tailwind.
+              Enthusiastic Web Developer with strong knowledge of React.js and Tailwind CSS, seeking an opportunity to contribute to real-world projects and enhance my development skills.
             </p>
           </div>
 

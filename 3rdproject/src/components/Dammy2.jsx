@@ -1,5 +1,6 @@
 import React from 'react'
-import data from './data2.js'
+import data from './data.js'
+
 
 const Dammy2 = () => {
   return (

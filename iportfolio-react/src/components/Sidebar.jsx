@@ -32,7 +32,7 @@ const Sidebar = () => {
       >
         <div className="flex flex-col items-center py-10">
           <img
-            src="ME.jpg"
+            src="My Photos.jpg"
             alt=""
             className="rounded-full border-4 border-gray-500 w-28 h-28"
           />

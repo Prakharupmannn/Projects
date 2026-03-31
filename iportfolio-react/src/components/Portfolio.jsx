@@ -38,7 +38,7 @@ export default function Portfolio() {
             key={item.id}
             className="bg-white rounded shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300"
           >
-            <img src={item.img} alt={item.title} className="w-full" />
+            <img alt={item.title} className="w-full" />
             <div className="p-4">
               <h3 className="font-bold text-lg">{item.title}</h3>
               <p className="text-gray-500">{item.category}</p>
