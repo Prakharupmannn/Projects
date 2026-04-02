@@ -12,9 +12,10 @@ const Dummy4 = () => {
 
         const result = await res.json();
 
-        console.log(result);
 
-        setData(result);
+        console.log(result.data);
+
+        setData(result.data);
     }
 
     useEffect(()=> {
@@ -28,7 +29,7 @@ const Dummy4 = () => {
             {data?.map((item, index) => {
                 return (
                     <div>
-                        <div>
+                        <div key={item.id}>
                             {item.name}
                             {item.college}
                             {item.isActive ? "True" : "False"}
@@ -39,7 +40,7 @@ const Dummy4 = () => {
                         <div>
                             {item.courses.map((item) => {
                                 return (
-                                <div>
+                                <div >
                                     <p>{item.courseName}</p>
                                     <p>{item.duration}</p>
                                     <p>{item.completed ? "True" : "False"}</p>
