@@ -25,11 +25,11 @@ const Dummy4 = () => {
   return (
     <div>
 
-        <div>
+        <div className='p-5 border'>
             {data?.map((item, index) => {
                 return (
-                    <div>
-                        <div key={item.id}>
+                    <div key={item.id}>
+                        <div>
                             {item.name}
                             {item.college}
                             {item.isActive ? "True" : "False"}
@@ -38,9 +38,9 @@ const Dummy4 = () => {
                             {item.profile.email}
                         </div>
                         <div>
-                            {item.courses.map((item) => {
+                            {item.courses.map((item , i) => {
                                 return (
-                                <div >
+                                <div key={i}>
                                     <p>{item.courseName}</p>
                                     <p>{item.duration}</p>
                                     <p>{item.completed ? "True" : "False"}</p>

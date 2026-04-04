@@ -11,6 +11,8 @@ import Dammy from './components/Dammy'
 import Dammy2 from './components/Dammy2'
 import Dummy3 from './components/dummy3'
 import Dummy4 from './components/Dummy4'
+import Day5 from './components/day5'
+
 
 function App() {
 
@@ -44,9 +46,14 @@ function App() {
 
 
 
+    // <>
+    //   <Dummy4></Dummy4>
+    // </>
+
     <>
-      <Dummy4></Dummy4>
+    <Day5/>
     </>
+    
   )
 }
 
