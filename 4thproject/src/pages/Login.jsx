@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Navbar2 from '../components/Navbar2';
 
 const Login = () => {
 
@@ -7,6 +8,8 @@ const Login = () => {
     const [password, setPassword] = useState("")
     const [role,setRole] = useState("") // radio state
     
+    const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -15,10 +18,10 @@ const Login = () => {
         console.log("role: ",role);
 
         if(role === 'admin') {
-            Navigate("/admin")
+            navigate("/Navbar2", {state: { role: "admin" }})
         } 
         else if(role === 'user') {
-            Navigate("/user")
+            navigate("/Navbar2", {state: { role: "user" }})
         }
         else{
             alert("Please select a role")
