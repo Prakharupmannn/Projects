@@ -9,7 +9,8 @@ import { BrowserRouter , Route , Routes } from 'react-router-dom'
 import Navbar2 from "./components/Navbar2"
 import Login from "./pages/Login"
 // import Day6 from "./components/Day6"
-import Form from './components/Form'
+// import Form from './components/Form'
+import Form2 from './components/Form2'
 
 function App() {
 
@@ -47,7 +48,7 @@ function App() {
 
 
   <>
-    <Form />
+    <Form2 />
   </>
   )
 }
