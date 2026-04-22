@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const ResumeBuilder = () => {
 
@@ -17,13 +17,16 @@ const ResumeBuilder = () => {
 
     const [experience,setExperience] = useState([]);
 
-    const [skills,setSkills] = useState([]);
-
     const [projects,setProjects] = useState([]);
+
+    useEffect(()=>{
+        const data = { personal, skills, education, experience, projects };
+        localStorage.setItem("resumeData", JSON.stringify(data))
+    },[personal, skills, education, experience, projects]);
 
   return (
     <div>
-
+        hiiii
     </div>
   )
 }
