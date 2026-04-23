@@ -1,103 +1,102 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
 const Form3 = () => {
+  const My_URL = 'http://192.168.1.36:5000/api/v1';
 
-    const My_URL = 'http://192.168.1.36:5000/api/v1';
+  const [data, setData] = useState({
+    name: "",
+    phone: "",
+    state: "",
+    city: "",
+    district: "",
+    tehsil: "",
+    address: "",
+  });
 
-    // this will store selected ids
-    const [data,setData] = useState({
-        name: "",
-        phone: "",
-        state: "",
-        city: "",
-        district: "",
-        tehsil: "",
-        address: "",
-    });
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [districts, setDistricts] = useState([]);
+  const [tehsils, setTehsils] = useState([]);
 
-    const [states, setStates] = useState([]);
-    const [cities, setCities] = useState([]);
-    const [districts,setDistricts] = useState([]);
-    const [tehsils, setTehsils] = useState([]);
-    const [saveData, setSaveData] = useState('')
+  const fetchStates = async () => {
+    const result = await fetch(`${My_URL}/states`);
+    const res = await result.json();
+    setStates(res.data);
+  };
 
-    const fetchStates = async () => {
-        const result = await fetch(`${My_URL}/states`);
-        const res = await result.json();
-        setStates(res.data);
-    }
-    
-    useEffect(() => {
-        fetchStates();
-    }, []);
+  useEffect(() => {
+    fetchStates();
+  }, []);
 
-    //when state change
-    const handleStateChange = async (e) => {
-        const stateId = e.target.value;
-        console.log(stateId);
-        // store selected state 
-        setData((prev) => ({
-            ...prev,
-            state: stateId,
-            city: "",
-            district: "",
-            tehsil: "",
-        }));
+  const handleStateChange = async (e) => {
+    const stateId = e.target.value;
 
-        //reset dropdowns
-        setCities([]);
-        setDistricts([]);
-        setTehsils([]);
+    setData((prev) => ({
+      ...prev,
+      state: stateId,
+      city: "",
+      district: "",
+      tehsil: "",
+    }));
 
-        // fetch cities
-        const cityResult = await fetch(`${My_URL}/cities/${stateId}`);
-        const cityData = await cityResult.json();
-        setCities(cityData.data);
-    }
+    setCities([]);
+    setDistricts([]);
+    setTehsils([]);
 
-    const handleCitiesChange = async (e) => {
-        const cityId = e.target.value;
+    if (!stateId) return;
 
-        setData((prev) => ({
-            ...prev,
-            city: cityId,
-            district: "",
-            tehsil: ""
-        }));
+    const cityResult = await fetch(`${My_URL}/cities/${stateId}`);
+    const cityData = await cityResult.json();
+    setCities(cityData.data);
+  };
 
-        setDistricts([]);
-        setTehsils([]);
+  const handleCitiesChange = async (e) => {
+    const cityId = e.target.value;
 
-        const districtResult = await fetch(`${My_URL}/districts/${cityId}`);
-        const districtData = await districtResult.json();
-        setDistricts(districtData.data);
-    }
+    setData((prev) => ({
+      ...prev,
+      city: cityId,
+      district: "",
+      tehsil: "",
+    }));
 
-    //when districts change
-    const handleDistrictChange = async (e) => {
-        const districtId = e.target.value;
+    setDistricts([]);
+    setTehsils([]);
 
-        setData((prev) => ({
-            ...prev,
-            district: districtId,
-            tehsil: "",
-        }))
+    if (!cityId) return;
 
-        setTehsils([]);
+    const districtResult = await fetch(`${My_URL}/districts/${cityId}`);
+    const districtData = await districtResult.json();
+    setDistricts(districtData.data);
+  };
 
-        const tehsilResult = await fetch(`${My_URL}/tehsils/${districtId}`);
-        const result = await tehsilResult.json();
-        setTehsils(result.data)
-    };
+  const handleDistrictChange = async (e) => {
+    const districtId = e.target.value;
 
-    const handleTehsilChange = (e) => {
-        const tehsilId = e.target.value;
+    setData((prev) => ({
+      ...prev,
+      district: districtId,
+      tehsil: "",
+    }));
 
-        setData((prev) => ({
-            ...prev,
-            tehsil: tehsilId,
-        }));
-    };
+    setTehsils([]);
+
+    if (!districtId) return;
+
+    const tehsilResult = await fetch(`${My_URL}/tehsils/${districtId}`);
+    const result = await tehsilResult.json();
+    setTehsils(result.data);
+  };
+
+  const handleTehsilChange = (e) => {
+    const tehsilId = e.target.value;
+
+    setData((prev) => ({
+      ...prev,
+      tehsil: tehsilId,
+    }));
+  };
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -119,91 +118,109 @@ const Form3 = () => {
         alert("Data Saved Successfully");
     };
 
-    // useEffect(()=>{
-    //     const savedData = localStorage.getItem("formData");
-    //     console.log(savedData)
+  const handleView = async () => {
+    const saved = JSON.parse(localStorage.getItem("formData"));
+    if (!saved) return;
 
-    //     // if(savedData) {
-    //     //     const parsedData = JSON.parse(savedData);
-    //     //     setData(parsedData);
-    //     // }
-    // },[])
+    setData(saved);
 
-    const handleView = (e) => {
-        e.preventDefault();
-
-        const saved = JSON.parse(localStorage.getItem("formData"));
-            setSaveData(saved)
-
-        console.log(saved)
+    if (saved.state) {
+      const cityResult = await fetch(`${My_URL}/cities/${saved.state}`);
+      const cityData = await cityResult.json();
+      setCities(cityData.data);
     }
 
-    // useEffect(() => {
-    //     localStorage.setItem("formData", JSON.stringify(data));
-    // },[data]);
+    if (saved.city) {
+      const districtResult = await fetch(`${My_URL}/districts/${saved.city}`);
+      const districtData = await districtResult.json();
+      setDistricts(districtData.data);
+    }
+
+    if (saved.district) {
+      const tehsilResult = await fetch(`${My_URL}/tehsils/${saved.district}`);
+      const tehsilData = await tehsilResult.json();
+      setTehsils(tehsilData.data);
+    }
+  };
 
   return (
     <>
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
+        <div className='p-5 grid grid-cols-2 gap-2'>
+          <input
+            type="text"
+            placeholder='Enter Name'
+            value={data.name}
+            onChange={(e) => setData((prev) => ({ ...prev, name: e.target.value }))}
+            className='border w-full'
+          />
 
-            <div className='p-5 grid grid-cols-2 gap-2'>
-                <input type="text" placeholder='Enter Name' value={saveData.name} onChange={(e) => setData((prev) => ({ ...prev, name: e.target.value }))} className='border w-full'/>
+          <input
+            type="text"
+            placeholder='Enter Phone'
+            value={data.phone}
+            onChange={(e) => setData((prev) => ({ ...prev, phone: e.target.value }))}
+            className='border w-full'
+          />
+        </div>
 
-                <input type="text" placeholder='Enter Phone' value={saveData.phone} onChange={(e) => setData((prev) => ({ ...prev, phone: e.target.value}))} className='border w-full'/>
-            </div>
-            
-            <div className='p-5 grid grid-cols-4'>
-                <select value={saveData.state} onChange={handleStateChange}>
-                <option value="">Select State</option>
-                {states?.map((item) => (
-                    <option value={item.id}>
-                        {item.name}
-                    </option>
-                ))}
-            </select>
+        <div className='p-5 grid grid-cols-4 gap-2'>
+          <select value={data.state} onChange={handleStateChange}>
+            <option value="">Select State</option>
+            {states?.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
+            ))}
+          </select>
 
-            <select value={saveData.city} onChange={handleCitiesChange} disabled={!data.state}>
-                <option value="">Select City</option>
-                {cities?.map((item) => (
-                    <option value={item.id}>
-                        {item.name}
-                    </option>
-                ))}
-            </select>
+          <select value={data.city} onChange={handleCitiesChange} disabled={!data.state}>
+            <option value="">Select City</option>
+            {cities?.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
+            ))}
+          </select>
 
-            <select value={saveData.district} onChange={handleDistrictChange} disabled={!data.city}>
-                <option value="">Select District</option>
-                {districts?.map((item) => (
-                    <option value={item.id}>
-                        {item.name}
-                    </option>
-                ))}
-            </select>
+          <select value={data.district} onChange={handleDistrictChange} disabled={!data.city}>
+            <option value="">Select District</option>
+            {districts?.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
+            ))}
+          </select>
 
-            <select value={saveData.tehsil} onChange={handleTehsilChange} disabled={!data.district}>
-                <option value="">Select Tehsil</option>
-                {tehsils?.map((item) => (
-                    <option value={item.id}>
-                        {item.name}
-                    </option>
-                ))}
-            </select>
-            </div>
+          <select value={data.tehsil} onChange={handleTehsilChange} disabled={!data.district}>
+            <option value="">Select Tehsil</option>
+            {tehsils?.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
 
-            <div className='border border-black w-80 grid grid-cols-1 p-2'>
-                <textarea name="address" value={saveData.address} placeholder='Enter address' onChange={(e) => setData((prev) => ({ ...prev, address: e.target.value}))}></textarea>
-            </div>
-            
-            <div className='grid grid-cols-1'>
-                <button type='submit'>Submit</button>
-            </div>
-            
-            <div className='grid grid-cols-1'>
-                <button type='submit' onClick={handleView}>View</button>
-            </div>
+        <div className='border border-black w-80 grid grid-cols-1 p-2'>
+          <textarea
+            name="address"
+            value={data.address}
+            placeholder='Enter address'
+            onChange={(e) => setData((prev) => ({ ...prev, address: e.target.value }))}
+          />
+        </div>
 
-        </form>
+        <div className='grid grid-cols-1'>
+          <button type='submit'>Submit</button>
+        </div>
+
+        <div className='grid grid-cols-1'>
+          <button type='button' onClick={handleView}>View</button>
+        </div>
+      </form>
     </>
-  )
-}
-export default Form3
+  );
+};
+
+export default Form3;

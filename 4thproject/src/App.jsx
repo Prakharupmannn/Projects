@@ -1,16 +1,17 @@
 
-import { BrowserRouter , Route , Routes } from 'react-router-dom'
-// import Navbar from './components/Navbar'
-// import Home from './pages/Home'
-// import Aboutus from './pages/Aboutus'
-// import Contact from './pages/Contact'
-// import Signin from './pages/Signin'
-// import Navbar from "./components/Navbar"
-import Navbar2 from "./components/Navbar2"
-import Login from "./pages/Login"
-// import Day6 from "./components/Day6"
-// import Form from './components/Form'
-import Form2 from './components/Form2'
+// import { BrowserRouter , Route , Routes } from 'react-router-dom'
+// // import Navbar from './components/Navbar'
+// // import Home from './pages/Home'
+// // import Aboutus from './pages/Aboutus'
+// // import Contact from './pages/Contact'
+// // import Signin from './pages/Signin'
+// // import Navbar from "./components/Navbar"
+// import Navbar2 from "./components/Navbar2"
+// import Login from "./pages/Login"
+// // import Day6 from "./components/Day6"
+// // import Form from './components/Form'
+// import Form2 from './components/Form2'
+import Dynamic from './components/Dynamic'
 import Form3 from './components/Form3'
 
 function App() {
@@ -52,9 +53,14 @@ function App() {
   //   <Form2 />
   // </>
 
-    <>
-    <Form3 />
+  //   <>
+  //   <Form3 />
+  // </>
+
+  <>
+    <Dynamic />
   </>
+  
   )
 }
 
