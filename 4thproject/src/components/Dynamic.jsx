@@ -1,18 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Dynamic = () => {
+  
+  const [name, setName] = useState('')
+  const [age, setAge] = useState('')
+  const [mobile, setMobile] = useState('')
+
   return (
     <div>
 
-        <form className='grid grid-cols-4 gap-5 p-10'>
-            <input type="text" placeholder='Enter Name' className='border border-gray-400 rounded'/>
-
-            <input type="number" placeholder='Enter Age' className='border border-gray-400 rounded'/>
-
-            <input type="number" placeholder='Enter Phone Number' className='border border-gray-400 rounded'/>
-
-            <button type='submit' className='bg-black text-white w-20 rounded'>Add</button>
-        </form>
+      <div className='grid grid-cols-4 p-5 gap-3 rounded '>
+        <input value={name} className='border border-black rounded h-10' onChange={(e)=>setName(e.target.value)} type="text" placeholder='Enter your Name'/>
+        <input value={mobile} className='border border-black rounded' type="text" onChange={(e)=>setMobile(e.target.value)} placeholder='Enter your mobile'/>
+        <input value={age} className='border border-black rounded' type="number" onChange={(e)=>setAge(e.target.value)} placeholder='Enter your age'/>
+        <button className='bg-black text-white rounded'>Add</button>
+      </div>
+      <div className='flex justify-center'>
+        <button className='bg-blue-400 rounded w-20 h-10 '>Submit</button>
+      </div>
 
     </div>
   )
